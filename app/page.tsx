@@ -1,16 +1,17 @@
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link2, Zap, BarChart3, Shield, ArrowRight } from "lucide-react";
 
 export default async function Home() {
-  // Note: auth() check removed temporarily for UI testing
-  // In production, uncomment the following lines:
-  // const { userId } = await auth();
-  // if (userId) {
-  //   redirect("/dashboard");
-  // }
+  const { userId } = await auth();
+
+  if (userId) {
+    redirect("/dashboard");
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
