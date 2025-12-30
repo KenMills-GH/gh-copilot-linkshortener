@@ -2,7 +2,12 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link2, Zap, BarChart3, Shield, ArrowRight } from "lucide-react";
 
@@ -26,21 +31,9 @@ export default async function Home() {
           <span className="text-primary">Track Performance.</span>
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-          Create short, memorable links in seconds. Monitor clicks, manage your links, and get insights - all in one powerful dashboard.
+          Create short, memorable links in seconds. Monitor clicks, manage your
+          links, and get insights - all in one powerful dashboard.
         </p>
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <SignUpButton mode="modal">
-            <Button size="lg" className="min-w-[200px]">
-              Get Started Free
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </SignUpButton>
-          <SignInButton mode="modal">
-            <Button size="lg" variant="outline" className="min-w-[200px]">
-              Sign In
-            </Button>
-          </SignInButton>
-        </div>
       </section>
 
       {/* Features Section */}
@@ -51,10 +44,11 @@ export default async function Home() {
               Everything you need to manage links
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Powerful features to help you create, track, and optimize your short links
+              Powerful features to help you create, track, and optimize your
+              short links
             </p>
           </div>
-          
+
           <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader>
@@ -114,7 +108,8 @@ export default async function Home() {
             Ready to get started?
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Join thousands of users who trust our platform for their link shortening needs
+            Join thousands of users who trust our platform for their link
+            shortening needs
           </p>
           <div className="mt-10">
             <SignUpButton mode="modal">
