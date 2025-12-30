@@ -161,3 +161,4 @@ When implementing new features:
 - Authentication is handled by **Clerk** - use their hooks and utilities
 - Use the `cn()` utility from `/lib/utils.ts` for conditional Tailwind classes
 - Always support **dark mode** with `dark:` variants
+- **NEVER use or create `middleware.ts`** - this is deprecated in Next.js 16. Use `/proxy.ts` instead for routing and request handling
