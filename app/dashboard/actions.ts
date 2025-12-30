@@ -10,6 +10,7 @@ import {
   getLinkById,
 } from "@/data/links";
 import { revalidatePath } from "next/cache";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 const createLinkSchema = z.object({
   url: z.string().url("Please enter a valid URL"),
@@ -47,11 +48,40 @@ export async function createLink(data: CreateLinkInput) {
     return { success: false, error: "You must be logged in to create links" };
   }
 
+  // 1b. Rate limiting - 10 links per minute per user
+  const rateLimitAllowed = checkRateLimit(`create-link:${userId}`, {
+    max: 10,
+    windowMs: 60000,
+  });
+
+  if (!rateLimitAllowed) {
+    return {
+      success: false,
+      error: "Too many requests. Please wait a moment and try again.",
+    };
+  }
+
   // 2. Validate data
   const validation = createLinkSchema.safeParse(data);
 
   if (!validation.success) {
     return { success: false, error: validation.error.issues[0].message };
+  }
+
+  // 2b. Validate URL protocol to prevent malicious URLs
+  try {
+    const url = new URL(validation.data.url);
+    if (!["http:", "https:"].includes(url.protocol)) {
+      return {
+        success: false,
+        error: "Only HTTP and HTTPS URLs are allowed",
+      };
+    }
+  } catch (urlError) {
+    return {
+      success: false,
+      error: "Invalid URL format",
+    };
   }
 
   // 3. Check if slug already exists
@@ -90,11 +120,40 @@ export async function updateLink(data: UpdateLinkInput) {
     return { success: false, error: "You must be logged in to update links" };
   }
 
+  // 1b. Rate limiting - 20 updates per minute per user
+  const rateLimitAllowed = checkRateLimit(`update-link:${userId}`, {
+    max: 20,
+    windowMs: 60000,
+  });
+
+  if (!rateLimitAllowed) {
+    return {
+      success: false,
+      error: "Too many requests. Please wait a moment and try again.",
+    };
+  }
+
   // 2. Validate data
   const validation = updateLinkSchema.safeParse(data);
 
   if (!validation.success) {
     return { success: false, error: validation.error.issues[0].message };
+  }
+
+  // 2b. Validate URL protocol to prevent malicious URLs
+  try {
+    const url = new URL(validation.data.url);
+    if (!["http:", "https:"].includes(url.protocol)) {
+      return {
+        success: false,
+        error: "Only HTTP and HTTPS URLs are allowed",
+      };
+    }
+  } catch (urlError) {
+    return {
+      success: false,
+      error: "Invalid URL format",
+    };
   }
 
   // 3. Verify link ownership
@@ -145,6 +204,19 @@ export async function deleteLink(linkId: number) {
 
   if (!userId) {
     return { success: false, error: "You must be logged in to delete links" };
+  }
+
+  // 1b. Rate limiting - 20 deletes per minute per user
+  const rateLimitAllowed = checkRateLimit(`delete-link:${userId}`, {
+    max: 20,
+    windowMs: 60000,
+  });
+
+  if (!rateLimitAllowed) {
+    return {
+      success: false,
+      error: "Too many requests. Please wait a moment and try again.",
+    };
   }
 
   // 2. Verify link ownership
