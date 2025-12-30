@@ -8,6 +8,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { shadcn } from "@clerk/themes";
 import { Button } from "@/components/ui/button";
 import "./globals.css";
 
@@ -32,6 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider appearance={{ baseTheme: shadcn }}>
+      <html lang="en" className="dark">
     <ClerkProvider>
       <html lang="en" className="dark" suppressHydrationWarning>
         <body
