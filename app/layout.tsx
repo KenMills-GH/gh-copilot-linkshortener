@@ -24,7 +24,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Link Shortener - Fast & Secure URL Shortening",
-  description: "Create short, memorable links in seconds. Track clicks, manage your links, and get insights with our powerful link shortener.",
+  description:
+    "Create short, memorable links in seconds. Track clicks, manage your links, and get insights with our powerful link shortener.",
 };
 
 export default function RootLayout({
@@ -34,8 +35,6 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider appearance={{ baseTheme: shadcn }}>
-      <html lang="en" className="dark">
-    <ClerkProvider>
       <html lang="en" className="dark" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
