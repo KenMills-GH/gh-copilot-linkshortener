@@ -1,3 +1,7 @@
+---
+description: Read this BEFORE implementing or modifying any authentication-related code to ensure compliance with project standards.
+---
+
 # Authentication Standards
 
 ## Overview

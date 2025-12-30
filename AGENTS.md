@@ -33,41 +33,13 @@ npm run db:studio    # Open Drizzle Studio
 - **Components**: `/components/ui` (base) and `/components/features` (feature-specific)
 - **Database**: `/db/schema.ts` (schema), `/db/index.ts` (client)
 - **Utilities**: `/lib/utils.ts`
-- **Documentation**: `/docs/*.md`
-
-## ⚠️ CRITICAL: Read Documentation BEFORE Coding
-
-**MANDATORY REQUIREMENT**: All coding standards, patterns, and best practices are documented in separate files in the `/docs` directory.
+- **Documentation**: `/.github/instructions/*.md`
 
 **YOU MUST ALWAYS READ THE RELEVANT DOCUMENTATION FILE(S) BEFORE GENERATING ANY CODE.**
 
 Do not skip this step. Do not assume you know the patterns. The documentation contains critical project-specific requirements that must be followed:
 
-### 📋 [Coding Standards](docs/coding-standards.md)
-
-General TypeScript, React, and Next.js coding standards including:
-
-- TypeScript best practices and type safety
-- Naming conventions
-- Component structure patterns
-- Server vs Client Components
-- Import organization
-- Error handling
-- Code quality guidelines
-
-### 🗄️ [Database Standards](docs/database-standards.md)
-
-Drizzle ORM and database patterns including:
-
-- Schema design and naming conventions
-- Table definitions and column types
-- Query patterns and type safety
-- Migration workflow
-- Transaction handling
-- Performance best practices
-- Data validation
-
-### 🔐 [Authentication Standards](docs/authentication-standards.md)
+### � [Authentication Standards](.github/instructions/authentication-standards.instructions.md)
 
 Clerk authentication implementation including:
 
@@ -79,7 +51,18 @@ Clerk authentication implementation including:
 - User ID storage in database
 - Security best practices
 
-### 🎨 [UI Component Standards](docs/ui-components.md)
+### 📊 [Data Fetching](.github/instructions/data-fetching.instructions.md)
+
+Data fetching patterns and best practices including:
+
+- Server Components data fetching
+- Client Components data fetching
+- Caching strategies
+- Error handling
+- Loading states
+- Type safety
+
+### 🎨 [UI Component Standards](.github/instructions/ui-components.instructions.md)
 
 shadcn/ui component usage (REQUIRED - use shadcn/ui exclusively):
 
@@ -92,25 +75,24 @@ shadcn/ui component usage (REQUIRED - use shadcn/ui exclusively):
 - Accessibility standards
 - Loading and error states
 
-### 🏗️ [Project Architecture](docs/project-architecture.md)
+### ⚡ [Server Actions Standards](.github/instructions/server-actions.instructions.md)
 
-Overall project structure and patterns including:
+Server-side data mutations and server actions including:
 
-- Technology stack overview
-- Project folder structure
-- Architectural patterns
-- Data flow patterns
-- Feature development workflow
-- Environment management
-- Performance optimization
+- File naming and colocation requirements
+- Type safety (no FormData types)
+- Zod validation patterns
+- Authentication checks
+- Database helper functions
 - Error handling
-- Deployment guidelines
+- Cache revalidation
+- Anti-patterns to avoid
 
 ## Key Principles
 
 When working on this project, always:
 
-1. **Read Documentation First**: ALWAYS read relevant `/docs` files BEFORE generating any code
+1. **Read Documentation First**: ALWAYS read relevant `/.github/instructions` files BEFORE generating any code
 2. **Type Safety First**: Use TypeScript strictly, no `any` types
 3. **Server-First**: Prefer Server Components, use Client Components only when needed
 4. **shadcn/ui Only**: Use shadcn/ui components exclusively, never create custom UI components
@@ -122,11 +104,11 @@ When working on this project, always:
 
 ## Adding New Features
 
-**IMPORTANT**: Before writing any code, you MUST read the relevant documentation files in the `/docs` directory.
+**IMPORTANT**: Before writing any code, you MUST read the relevant documentation files in the `/.github/instructions` directory.
 
 When implementing new features:
 
-1. **READ the relevant documentation in `/docs` folder FIRST** (this is mandatory)
+1. **READ the relevant documentation in `/.github/instructions` folder FIRST** (this is mandatory)
 2. Follow the established patterns in existing code
 3. Use Server Components by default
 4. Protect routes with Clerk authentication
@@ -148,7 +130,7 @@ When implementing new features:
 
 ## Getting Help
 
-- For coding patterns: See relevant doc in `/docs`
+- For coding patterns: See relevant doc in `/.github/instructions`
 - For dependencies: Check [package.json](package.json)
 - For configuration: See config files (`next.config.ts`, `tsconfig.json`, etc.)
 - For database schema: See [db/schema.ts](db/schema.ts)

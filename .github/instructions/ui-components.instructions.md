@@ -1,3 +1,7 @@
+---
+description: Read this BEFORE implementing or modifying any UI components to ensure compliance with project standards.
+---
+
 # UI Component Standards
 
 ## Overview
